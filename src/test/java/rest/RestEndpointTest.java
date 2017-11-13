@@ -19,8 +19,8 @@ public class RestEndpointTest {
 
 	@Deployment
 	public static JavaArchive createDeployment() {
-		return ShrinkWrap.create(JavaArchive.class).addPackages(true, "rest").addAsManifestResource(EmptyAsset.INSTANCE,
-				"beans.xml");
+		return ShrinkWrap.create(JavaArchive.class).addPackages(true, "rest")
+				.addAsManifestResource(EmptyAsset.INSTANCE,"beans.xml");
 	}
 
 	@Test
