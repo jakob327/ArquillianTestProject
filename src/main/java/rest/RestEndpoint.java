@@ -1,8 +1,5 @@
 package rest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ws.rs.GET;
@@ -23,20 +20,13 @@ public class RestEndpoint {
 	@GET
 	@Path("/params")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> getParams(@QueryParam("value") String params) {
-		List<String> result = new ArrayList<>();
+	public String getParams(@QueryParam("value") String params) {
+		StringBuilder result = new StringBuilder();
 		for (String key : uriInfo.getQueryParameters().keySet()) {
 			for (String value : uriInfo.getQueryParameters().get(key)) {
-				result.add(key + "=" + value);
+				result.append(key + "=" + value);
 			}
 		}
-		return result;
-	}
-
-	@GET
-	@Path("/world")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String helloWorld() {
-		return "Hello World";
+		return result.toString();
 	}
 }

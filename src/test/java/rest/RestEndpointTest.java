@@ -1,13 +1,31 @@
 package rest;
 
-import org.junit.Test;
+import javax.inject.Inject;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(Arquillian.class)
 public class RestEndpointTest {
+	
+	@Inject
+	RestEndpoint endpoint;
+
+	@Deployment
+	public static JavaArchive createDeployment() {
+		return ShrinkWrap.create(JavaArchive.class).addPackages(true, "rest").addAsManifestResource(EmptyAsset.INSTANCE,
+				"beans.xml");
+	}
 
 	@Test
-	public void testGetParams(){
-		Assert.assertEquals(true, true);
+	public void testGetParams() {
+		 String params = endpoint.getParams("");
+		 Assert.assertTrue(params.isEmpty());
 	}
 }
